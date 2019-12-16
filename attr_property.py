@@ -145,8 +145,8 @@ def attr_property_class(cls):
 	return cls
 
 def attr_property(
-	default=attr.NOTHING, validator=None, repr=True, eq=True, order=None,
-	hash=None, init=True, metadata=None, type=None, converter=None,
+	default=attr.NOTHING, validator=None, repr=True, cmp=None, hash=None, init=True,
+	metadata=None, type=None, converter=None, factory=None, kw_only=False, eq=None, order=None,
 	getter=None, setter=None, deleter=None, # property
 	validator_runtime=True, converter_runtime=True,
 	cache = True, raw = False, doc = None
@@ -183,7 +183,7 @@ def attr_property(
 	metadata['property.raw'] = '_' if raw is True else raw
 	metadata['property.doc'] = doc
 	return attr.ib(
-		default=default, validator=validator, repr=repr,
-		eq=eq, order=order, hash=hash, init=init,
-		metadata=metadata, type=type, converter=converter
+		default=default, validator=validator, repr=repr, cmp=cmp, hash=hash,
+		init=init, metadata=metadata, type=type, converter=converter,
+		factory=factory, kw_only=kw_only, eq=eq, order=order,
 	)
