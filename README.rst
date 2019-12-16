@@ -2,6 +2,32 @@
 attr_property
 =============
 
+`
+.. image:: https://img.shields.io/pypi/v/attr_property?style=flat-square
+   :target: https://img.shields.io/pypi/v/attr_property?style=flat-square
+   :alt: Pypi
+ <https://pypi.org/project/attr_property/>`_ `
+.. image:: https://img.shields.io/github/tag/pwwang/attr_property?style=flat-square
+   :target: https://img.shields.io/github/tag/pwwang/attr_property?style=flat-square
+   :alt: Github
+ <https://github.com/pwwang/attr_property>`_ `
+.. image:: https://img.shields.io/pypi/pyversions/attr_property?style=flat-square
+   :target: https://img.shields.io/pypi/pyversions/attr_property?style=flat-square
+   :alt: PythonVers
+ <https://pypi.org/project/attr_property/>`_ `
+.. image:: https://img.shields.io/travis/pwwang/attr_property?style=flat-square
+   :target: https://img.shields.io/travis/pwwang/attr_property?style=flat-square
+   :alt: Travis building
+ <https://travis-ci.org/pwwang/attr_property>`_ `
+.. image:: https://img.shields.io/codacy/grade/41140ad263bc435a822777bed8a41b8d?style=flat-square
+   :target: https://img.shields.io/codacy/grade/41140ad263bc435a822777bed8a41b8d?style=flat-square
+   :alt: Codacy
+ <https://app.codacy.com/manual/pwwang/attr_property/dashboard>`_ `
+.. image:: https://img.shields.io/codacy/coverage/41140ad263bc435a822777bed8a41b8d?style=flat-square
+   :target: https://img.shields.io/codacy/coverage/41140ad263bc435a822777bed8a41b8d?style=flat-square
+   :alt: Codacy coverage
+ <https://app.codacy.com/manual/pwwang/attr_property/dashboard>`_
+
 Property support for attrs
 
 Installation
