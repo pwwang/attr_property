@@ -37,9 +37,11 @@ def property_setter(self, value, name, setter = None, converter = None, validato
 		value = converter(value)
 	if validator:
 		validator(self, attr.fields_dict(self.__class__)[name], value)
-	self.__attrs_property_raw__[name] = value
 	if setter:
-		setter(self, value)
+		value_set = setter(self, value)
+		if value_set is not None:
+			value = value_set
+	self.__attrs_property_raw__[name] = value
 
 def property_deleter(self, name, deleter = None):
 	"""

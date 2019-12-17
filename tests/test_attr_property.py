@@ -8,6 +8,9 @@ def c_setter(self, value):
 def d_getter(self, value):
 	return value * 3
 
+def e_setter(self, value):
+	return value * 100
+
 @attr_property_class
 @attr.s
 class TestInstance:
@@ -16,6 +19,7 @@ class TestInstance:
 	b = attr_property()
 	c = attr_property(setter = c_setter, deleter = lambda this: setattr(this, 'c_deleted', True))
 	d = attr_property(getter = d_getter, converter = int, raw = '_')
+	e = attr_property(setter = e_setter, init = False, raw = True)
 
 	@d.validator
 	def lessthan20(self, attribute, value):
@@ -33,7 +37,10 @@ def test(capsys):
 	assert inst.c == 3
 	assert inst.d == 12
 	assert inst._d == 4
-	assert inst.__attrs_property_cached__ == dict(b = 2, c = 3, d = 12)
+	inst.e = 1
+	assert inst.e == 100
+	assert inst._e == 100
+	assert inst.__attrs_property_cached__ == dict(b = 2, c = 3, d = 12, e = 100)
 
 	assert 'Value 3 has been set to property c.' in capsys.readouterr().out
 	assert inst.c == 3
@@ -41,8 +48,8 @@ def test(capsys):
 	assert not hasattr(inst, 'c_deleted')
 	del inst.c
 	assert inst.c_deleted
-	assert inst.__attrs_property_raw__ == dict(b = 2, d = 4)
-	assert inst.__attrs_property_cached__ == dict(b = 2, d = 12)
+	assert inst.__attrs_property_raw__ == dict(b = 2, d = 4, e = 100)
+	assert inst.__attrs_property_cached__ == dict(b = 2, d = 12, e = 100)
 	inst.c = 30
 	assert 'Value 30 has been set to property c.' in capsys.readouterr().out
 	assert inst.c == 30
