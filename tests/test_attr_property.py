@@ -13,7 +13,7 @@ def e_setter(self, value):
 
 @attr_property_class
 @attr.s
-class TestInstance:
+class _TestInstance:
 
 	a = attr.ib()
 	b = attr_property()
@@ -27,11 +27,18 @@ class TestInstance:
 			raise ValueError("d should be less than 20.")
 
 
+@attr_property_class
+@attr.s(slots = True)
+class _TestSlots:
+
+	a = attr.ib()
+	b = attr_property()
+
 def test(capsys):
-	inst = TestInstance(a = 1, b = 2, c = 3, d = '4')
+	inst = _TestInstance(a = 1, b = 2, c = 3, d = '4')
 	assert inst.__attrs_property_raw__ == dict(b = 2, c = 3, d = 4)
 	assert inst.__attrs_property_cached__ == {'d': 12}
-	assert isinstance(inst, TestInstance)
+	assert isinstance(inst, _TestInstance)
 	assert inst.a == 1
 	assert inst.b == 2
 	assert inst.c == 3

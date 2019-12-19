@@ -63,8 +63,8 @@ def _attrs_to_init_script(attrs, frozen, slots, post_init, cache_hash, base_attr
 		attrs, frozen, slots, post_init, cache_hash, base_attr_map, is_exc
 	)
 	lines = script.splitlines()
-	lines.insert(1, '    self.__attrs_property_cached__ = {}')
-	lines.insert(2, '    self.__attrs_property_raw__ = {}')
+	lines.insert(1, '    self.__dict__["__attrs_property_cached__"] = {}')
+	lines.insert(2, '    self.__dict__["__attrs_property_raw__"] = {}')
 	return '\n'.join(lines), globs, annotations
 
 def _make_init(cls, attrs, post_init, frozen, slots,
