@@ -28,13 +28,19 @@ class _TestInstance:
 
 
 @attr_property_class
-@attr.s(slots = True)
+@attr.s(slots = True, eq = False)
 class _TestSlots:
-
+	__dict__ = attr.ib(init = False, repr = False)
 	a = attr.ib()
 	b = attr_property()
 
+def test_slots():
+	inst_slots = _TestSlots(a = 1, b = 2)
+	assert inst_slots.a == 1
+	assert inst_slots.b == 2
+
 def test(capsys):
+
 	inst = _TestInstance(a = 1, b = 2, c = 3, d = '4')
 	assert inst.__attrs_property_raw__ == dict(b = 2, c = 3, d = 4)
 	assert inst.__attrs_property_cached__ == {'d': 12}
