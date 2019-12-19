@@ -123,8 +123,8 @@ Order of execution of setter:
 * Delete cached value
 * Run converter
 * Run validator
-* Save converted value as raw value
 * Run specified setter
+* Save value as raw value
 
 Caching getter results
 ^^^^^^^^^^^^^^^^^^^^^^

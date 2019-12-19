@@ -24,7 +24,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='attr_property',
-    version='0.0.3',
+    version='0.0.4',
     description='Property support for attrs',
     python_requires='==3.*,>=3.5.0',
     project_urls={"homepage": "https://github.com/pwwang/attr_property", "repository": "https://github.com/pwwang/attr_property"},
