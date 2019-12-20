@@ -2,7 +2,7 @@
 from functools import partial
 import attr
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 def property_getter(self, name, getter = None, cache = False):
 	"""
