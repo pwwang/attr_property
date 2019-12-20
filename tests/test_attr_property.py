@@ -32,11 +32,13 @@ class _TestInstance:
 class _TestSlots:
 	a = attr.ib()
 	b = attr_property()
+	c = attr_property(init = False, repr = False, getter = lambda this, value: 3)
 
 def test_slots():
 	inst_slots = _TestSlots(a = 1, b = 2)
 	assert inst_slots.a == 1
 	assert inst_slots.b == 2
+	assert inst_slots.c == 3
 
 def test(capsys):
 

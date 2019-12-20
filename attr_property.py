@@ -14,10 +14,10 @@ def property_getter(self, name, getter = None, cache = False):
 	"""
 	if cache and name in self.__attrs_property_cached__:
 		return self.__attrs_property_cached__[name]
-	if name not in self.__attrs_property_raw__:
-		return None
-	ret = getter(self, self.__attrs_property_raw__[name]) \
-		if callable(getter) else self.__attrs_property_raw__[name]
+
+	raw = self.__attrs_property_raw__.get(name)
+	ret = getter(self, raw) \
+		if callable(getter) else raw
 	if cache:
 		self.__attrs_property_cached__[name] = ret
 	return ret
