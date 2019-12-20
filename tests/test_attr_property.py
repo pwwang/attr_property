@@ -30,7 +30,6 @@ class _TestInstance:
 @attr_property_class
 @attr.s(slots = True, eq = False)
 class _TestSlots:
-	__dict__ = attr.ib(init = False, repr = False)
 	a = attr.ib()
 	b = attr_property()
 

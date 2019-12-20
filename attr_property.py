@@ -113,7 +113,9 @@ def attr_property_class(cls):
 	if not hasattr(cls, '__attrs_attrs__'):
 		raise ValueError("attr_property_class should be a decorator of an attr.s decorated class.")
 	if hasattr(cls, '__slots__'):
-		cls.__slots__ = ('__attrs_property_cached__', '__attrs_property_raw__') + cls.__slots__
+		cls_dict = {key: val for key, val in cls.__dict__.items() if key not in cls.__slots__}
+		cls_dict['__slots__'] += ('__attrs_property_raw__', '__attrs_property_cached__')
+		cls = type(cls)(cls.__name__, cls.__bases__, cls_dict)
 	for attribute in cls.__attrs_attrs__:
 		if attribute.metadata.get('property'):
 			attr_getter = partial(property_getter,
