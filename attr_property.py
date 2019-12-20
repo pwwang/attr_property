@@ -14,6 +14,8 @@ def property_getter(self, name, getter = None, cache = False):
 	"""
 	if cache and name in self.__attrs_property_cached__:
 		return self.__attrs_property_cached__[name]
+	if name not in self.__attrs_property_raw__:
+		return None
 	ret = getter(self, self.__attrs_property_raw__[name]) \
 		if callable(getter) else self.__attrs_property_raw__[name]
 	if cache:
@@ -50,7 +52,8 @@ def property_deleter(self, name, deleter = None):
 		name (str): The name of the property
 		deleter (callable): User-defined deleter
 	"""
-	del self.__attrs_property_raw__[name]
+	if name in self.__attrs_property_raw__:
+		del self.__attrs_property_raw__[name]
 	if name in self.__attrs_property_cached__:
 		del self.__attrs_property_cached__[name]
 	if deleter:
