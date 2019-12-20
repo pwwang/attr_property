@@ -139,7 +139,7 @@ def attr_property_class(cls):
 				deleter = attribute.metadata['property.deleter'])
 			setattr(cls, attribute.name, property(
 				attr_getter,
-				attr_setter,
+				None if attribute.metadata['property.setter'] is False else attr_setter,
 				None if attribute.metadata['property.deleter'] is False else attr_deleter,
 				attribute.metadata['property.doc'] or (
 					attribute.metadata['property.getter'].__doc__ \

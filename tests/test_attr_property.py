@@ -32,13 +32,18 @@ class _TestInstance:
 class _TestSlots:
 	a = attr.ib()
 	b = attr_property()
-	c = attr_property(init = False, repr = False, getter = lambda this, value: 3)
+	c = attr_property(init = False, getter = lambda this, value: 3)
+	# disable setter
+	d = attr_property(init = False, setter = False, getter = lambda this, value: 4)
 
 def test_slots():
 	inst_slots = _TestSlots(a = 1, b = 2)
 	assert inst_slots.a == 1
 	assert inst_slots.b == 2
 	assert inst_slots.c == 3
+	assert inst_slots.d == 4
+	with pytest.raises(AttributeError):
+		inst_slots.d = 8
 
 def test(capsys):
 

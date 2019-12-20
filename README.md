@@ -62,6 +62,26 @@ del a.a
 # AttributeError: can't delete attribute
 ```
 
+### Disabling setter
+
+```python
+@attr_property_class
+@attr.s
+class A:
+    # remember you can set init = True or
+    # set any default values for it,
+    # as setter will be called in __init__
+    # this will cause AttributeError
+    a = attr_property(init = False, setter = False, getter = lambda this, value: 2)
+
+a = A()
+a.a = 1
+# AttributeError: can't set attribute
+
+# OK to call getter
+a.a == 2
+```
+
 ### Run `attr.ib`'s converter and validator in setter
 
 ```python
