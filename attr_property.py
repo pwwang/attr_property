@@ -63,8 +63,8 @@ def _attrs_to_init_script(attrs, frozen, slots, post_init, cache_hash, base_attr
 		attrs, frozen, slots, post_init, cache_hash, base_attr_map, is_exc
 	)
 	lines = script.splitlines()
-	lines.insert(1, '    self.__dict__["__attrs_property_cached__"] = {}')
-	lines.insert(2, '    self.__dict__["__attrs_property_raw__"] = {}')
+	lines.insert(1, '    self.__attrs_property_cached__ = {}')
+	lines.insert(2, '    self.__attrs_property_raw__ = {}')
 	return '\n'.join(lines), globs, annotations
 
 def _make_init(cls, attrs, post_init, frozen, slots,
@@ -112,6 +112,8 @@ def attr_property_class(cls):
 	"""
 	if not hasattr(cls, '__attrs_attrs__'):
 		raise ValueError("attr_property_class should be a decorator of an attr.s decorated class.")
+	if hasattr(cls, '__slots__'):
+		cls.__slots__ = ('__attrs_property_cached__', '__attrs_property_raw__') + cls.__slots__
 	for attribute in cls.__attrs_attrs__:
 		if attribute.metadata.get('property'):
 			attr_getter = partial(property_getter,
