@@ -79,6 +79,8 @@ def _attrs_to_init_script(attrs, # pylint: disable=too-many-arguments
     # pragma: no cover
     script, globs, annotations = attr._make._attrs_to_init_script(
         attrs, frozen, slots, post_init, cache_hash, base_attr_map, is_exc)
+    if frozen:
+        return script, globs, annotations
     lines = script.splitlines()
     lines.insert(1, '    self.__attrs_property_cached__ = {}')
     lines.insert(2, '    self.__attrs_property_raw__ = {}')
@@ -103,7 +105,7 @@ def _make_init(cls, attrs, post_init, frozen, slots, cache_hash, base_attr_map,
     if frozen is True:
         # Save the lookup overhead in __init__ if we need to circumvent
         # immutability.
-        globs["_cached_setattr"] = attr._make.obj_setattr
+        globs["_cached_setattr"] = object.__setattr__
 
     eval(bytecode, globs, locs)
 
